@@ -53,6 +53,7 @@ RUN { \
 RUN sed -Ei 's/^(bind-address|log)/#&/' /etc/mysql/my.cnf \
 	&& echo 'skip-host-cache\nskip-name-resolve' | awk '{ print } $1 == "[mysqld]" && c == 0 { c = 1; system("cat") }' /etc/mysql/my.cnf > /tmp/my.cnf \
 	&& mv /tmp/my.cnf /etc/mysql/my.cnf
+RUN echo "character-set-server=utf8" >> /etc/mysql/mysql.conf.d/mysqld.cnf
 
 VOLUME /var/lib/mysql
 
